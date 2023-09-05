@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">dbnet_demo</string>
+    <string-array name="model_array">
+        <item>det-sim-op</item>
+        <item>v3det</item>
+        <item>pdocrv2.0_det-op</item>
+        <item>ch_PP-OCRv3_det</item>
+        <item>new_det_infer-sim</item>
+    </string-array>
+    <string-array name="cpugpu_array">
+        <item>CPU</item>
+        <item>GPU</item>
+    </string-array>
+</resources>
