@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ncnn Android DBNet 结果展示</title>
+  <meta name="description" content="ncnn-Android-DBnet 的静态结果展示。这是 Android / ncnn 上的 DBNet 文字检测演示，不能在浏览器里运行。本页只依据 README、源码和根目录 result.gif。">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#1b1916">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://unstoppablecurry.github.io/ncnn-Android-DBnet/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="ncnn-Android-DBnet">
+  <meta property="og:title" content="ncnn Android DBNet 结果展示">
+  <meta property="og:description" content="Android / ncnn DBNet 文字检测演示的静态结果页。不能在浏览器里跑模型；只展示仓库已写明的用途、流水线、构建步骤和 result.gif。">
+  <meta property="og:url" content="https://unstoppablecurry.github.io/ncnn-Android-DBnet/">
+  <meta property="og:image" content="https://unstoppablecurry.github.io/ncnn-Android-DBnet/assets/result-poster.jpg">
+  <meta property="og:image:alt" content="仓库 result.gif 的静止帧：手持 Android 预览对着显示器，画面上有检测框。">
+  <meta property="og:image:width" content="426">
+  <meta property="og:image:height" content="240">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ncnn Android DBNet 结果展示">
+  <meta name="twitter:description" content="静态结果展示，不是在线 demo。依据 README、源码和根目录 result.gif。">
+  <meta name="twitter:image" content="https://unstoppablecurry.github.io/ncnn-Android-DBnet/assets/result-poster.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "ncnn Android DBNet 结果展示",
+    "inLanguage": "zh-CN",
+    "url": "https://unstoppablecurry.github.io/ncnn-Android-DBnet/",
+    "description": "Android / ncnn DBNet 文字检测演示的静态结果展示。不能在浏览器中运行原生推理。",
+    "isPartOf": {
+      "@type": "SoftwareSourceCode",
+      "name": "ncnn-Android-DBnet",
+      "codeRepository": "https://github.com/UnstoppableCurry/ncnn-Android-DBnet",
+      "programmingLanguage": ["Java", "C++"],
+      "runtimePlatform": "Android"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./">
+        <img class="brand-mark" src="favicon.svg" alt="">
+        <span>ncnn Android DBNet</span>
+      </a>
+      <nav class="site-nav" aria-label="本页章节">
+        <a href="#purpose">用途</a>
+        <a href="#pipeline">流水线</a>
+        <a href="#build">构建</a>
+        <a href="#result">结果</a>
+        <a href="#limits">局限</a>
+      </nav>
+    </div>
+  </header>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="kicker">静态展示 · 非浏览器推理</p>
+      <h1>Android 上的 DBNet 检测演示</h1>
+      <p class="lede">README 写的是「dbnet / dbnet++ 用 ncnn 做 Android 推理」的 demo。应用名是 <code>dbnet_demo</code>。原生 Camera2 + ncnn 管线不能在这个页面里跑，所以这里只做结果与说明展示。</p>
+      <p class="en-lead" lang="en">A static showcase for the Android/ncnn DBNet text-detection demo. The native camera pipeline cannot run in a browser. Nothing here invents accuracy, FPS, devices, or deployments.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#result">看仓库里的 GIF</a>
+        <a class="button button-ghost" href="https://github.com/UnstoppableCurry/ncnn-Android-DBnet">打开 GitHub 仓库</a>
+      </div>
+      <ul class="facts">
+        <li><strong>页面性质</strong>GitHub Pages 静态站</li>
+        <li><strong>可运行处</strong>Android 工程，需本机构建</li>
+        <li><strong>影像来源</strong>根目录 <code>result.gif</code></li>
+        <li><strong>未公布项</strong>精度、帧率、机型、上线案例</li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" id="purpose" aria-labelledby="purpose-title">
+      <h2 id="purpose-title">项目用途</h2>
+      <p>这是一个 Android 演示工程：用 <a href="https://github.com/Tencent/ncnn">Tencent ncnn</a> 跑 DBNet / DBNet++ 文字检测，预览画在相机画面上。README 同时列出 <a href="https://github.com/nihui/opencv-mobile">opencv-mobile</a>，以及 <a href="https://github.com/PaddlePaddle/PaddleOCR">PaddleOCR</a>、<a href="https://github.com/FeiGeChuanShu/ncnn-Android-mediapipe_hand">ncnn-Android-mediapipe_hand</a> 作为参考。</p>
+      <p>包名是 <code>com.ncnn.dbnet</code>，界面标题来自 <code>app/src/main/res/values/strings.xml</code> 的 <code>dbnet_demo</code>。当前相机路径做的是检测与画框：JNI 每帧调用 <code>Det::detect</code>，源码里的 <code>TextBox.text</code> 以及 <code>getRotateCropImage</code> / <code>getPartImages</code> 没有接到这条实时路径上。仓库 assets 里也只有 <code>*det*</code> 模型，没有识别网络。</p>
+    </section>
+
+    <section class="section section-wide" id="pipeline" aria-labelledby="pipeline-title">
+      <h2 id="pipeline-title">可见流水线</h2>
+      <p>下面按当前源码串起来，不是产品说明书。</p>
+      <ol class="pipeline">
+        <li>
+          <strong>Camera2 NDK 取流</strong>
+          <span>Manifest 声明 <code>CAMERA</code> 权限和 <code>android.hardware.camera2.full</code>。Activity 竖屏，打开前后摄，把 <code>SurfaceView</code> 交给 native。</span>
+          <span class="cite">AndroidManifest.xml · MainActivity.java · ndkcamera.cpp</span>
+        </li>
+        <li>
+          <strong>选模型，选 CPU / GPU</strong>
+          <span>界面有「切换摄像头」、模型下拉框和 CPU / GPU 下拉框。GPU 在 ncnn 打开 Vulkan 时对应 <code>use_vulkan_compute</code>；若 <code>get_gpu_count() == 0</code>，检测器会被清掉，预览画 <code>unsupported</code>。</span>
+          <span class="cite">main.xml · strings.xml · DBnetJNI.cpp</span>
+        </li>
+        <li>
+          <strong>从 assets 加载 ncnn 模型</strong>
+          <span><code>loadModel</code> 读 <code>{modeltype}.param</code> 与 <code>{modeltype}.bin</code>。CMake 链接 ncnn、opencv-mobile 的 core/imgproc，以及 <code>camera2ndk</code>、<code>mediandk</code>。</span>
+          <span class="cite">DBnetJNI.cpp · CMakeLists.txt</span>
+        </li>
+        <li>
+          <strong>DB 式检测与画框</strong>
+          <span><code>Det::detect</code> 把长边缩到 640，再 pad 到 32 的倍数，按源码里的 ImageNet mean/norm 归一化，输入 <code>input0</code>、输出 <code>out1</code>。概率图按阈值二值化、膨胀、找轮廓，再用 Clipper 做 unclip，最后在帧上画轮廓和多边形。阈值在 JNI 里写成 <code>0.4 / 0.3 / 2.0</code>。</span>
+          <span class="cite">Det.cpp · common.cpp · clipper.cpp · DBnetJNI.cpp</span>
+        </li>
+        <li>
+          <strong>叠加 FPS 后送窗</strong>
+          <span><code>draw_fps</code> 用滑动平均在画面上写 <code>FPS=...</code>。这是预览装饰，仓库没有把它整理成测试表。</span>
+          <span class="cite">DBnetJNI.cpp</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section section-wide" id="build" aria-labelledby="build-title">
+      <h2 id="build-title">构建与运行</h2>
+      <p>README 的步骤如下。本页没有替你跑过 Android 构建。</p>
+      <ol class="steps">
+        <li>从 <a href="https://github.com/Tencent/ncnn/releases">ncnn Releases</a> 下载 <code>ncnn-YYYYMMDD-android-vulkan.zip</code>，或自行编译 Android 版 ncnn。解压到 <code>app/src/main/jni</code>，并改 <code>app/src/main/jni/CMakeLists.txt</code> 里的 <code>ncnn_DIR</code>。</li>
+        <li>从 <a href="https://github.com/nihui/opencv-mobile">opencv-mobile</a> 下载 <code>opencv-mobile-XYZ-android.zip</code>，解压到同一 <code>jni</code> 目录，并改 <code>OpenCV_DIR</code>。</li>
+        <li>用 Android Studio 打开工程，构建后在真机或模拟器上运行。</li>
+      </ol>
+      <h3>仓库构建文件里还能直接读到的内容</h3>
+      <ul>
+        <li>当前 CMake 已指向 <code>ncnn-20230223-android-vulkan/${ANDROID_ABI}</code> 和 <code>opencv-mobile-4.6.0-android/sdk/native/jni</code>。</li>
+        <li><code>app/build.gradle</code>：<code>minSdkVersion 24</code>，<code>compileSdkVersion 24</code>，CMake 3.10.2，applicationId <code>com.ncnn.dbnet</code>。</li>
+        <li>根目录 <code>build.gradle</code> 使用 Android Gradle Plugin 3.5.0。</li>
+        <li>CMake 写的是 <code>det.cpp</code>，仓库里的文件名是 <code>Det.cpp</code>。在大小写敏感的文件系统上需要留意。</li>
+      </ul>
+
+      <h3>README、界面和 assets 对得上的模型</h3>
+      <div class="table-wrap" tabindex="0">
+        <table>
+          <caption class="visually-hidden">模型在 README、界面和 assets 中的出现情况</caption>
+          <thead>
+            <tr>
+              <th scope="col">名称</th>
+              <th scope="col">README</th>
+              <th scope="col">界面 / JNI</th>
+              <th scope="col">assets</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>det-sim-op</code></td>
+              <td>列出</td>
+              <td>列出</td>
+              <td>有 <code>.param</code> / <code>.bin</code></td>
+            </tr>
+            <tr>
+              <td><code>pdocrv2.0_det-op</code></td>
+              <td>列出</td>
+              <td>列出</td>
+              <td>有 <code>.param</code> / <code>.bin</code></td>
+            </tr>
+            <tr>
+              <td><code>ch_PP-OCRv3_det</code></td>
+              <td>列出，并标 <code>(bug)</code></td>
+              <td>列出</td>
+              <td>有 <code>.param</code> / <code>.bin</code></td>
+            </tr>
+            <tr>
+              <td><code>dbnet++</code></td>
+              <td>列出，并标 <code>(bug)</code></td>
+              <td>未列入下拉框</td>
+              <td>未见对应文件</td>
+            </tr>
+            <tr>
+              <td><code>v3det</code></td>
+              <td>未写</td>
+              <td>列出</td>
+              <td>有 <code>.param</code> / <code>.bin</code></td>
+            </tr>
+            <tr>
+              <td><code>new_det_infer-sim</code></td>
+              <td>未写</td>
+              <td>列出</td>
+              <td>未见对应文件</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small"><code>Det.h</code> 注释写：一般 <code>dstHeight = 32</code>，「when use PP-OCRv3 it should be 48」。当前 <code>detect()</code> 没有用这个量。</p>
+    </section>
+
+    <section class="section" id="result" aria-labelledby="result-title">
+      <h2 id="result-title">看得见的结果</h2>
+      <p>仓库提供的演示影像只有根目录 <code>result.gif</code>。下面静止帧从同一文件截出，完整动画约 3.2MB，默认不自动下载。</p>
+      <figure class="demo">
+        <div class="demo-stage" id="demo-stage">
+          <img
+            id="demo-poster"
+            src="assets/result-poster.jpg"
+            width="426"
+            height="240"
+            alt="result.gif 的静止帧：手持拍摄的 Android 预览，镜头对着显示器上的文字页面，预览上叠有检测框。"
+            decoding="async">
+          <div class="demo-overlay">
+            <p>完整动画 GIF89a · 426×240 · 约 20 秒 · 约 3.2MB</p>
+            <button type="button" class="button" id="demo-load">加载演示动画</button>
+          </div>
+        </div>
+        <figcaption>
+          README 标注的 screenshot。画面是一次已录制的 Android 预览，不是这个网页在做推理。
+          预览上能看到检测框，以及源码会绘制的 FPS 文字；本页不把某一帧上的数字当成性能结论。
+          当前源码界面是「切换摄像头」和模型 / CPU-GPU 下拉框；GIF 是仓库里留下的历史录屏，控件文案若看不清，不以画面臆造功能。
+          <a href="assets/result.gif">直接打开 result.gif</a>
+          <span id="demo-error" hidden>。本地预览若还没拷贝该文件，请先把仓库根目录的 <code>result.gif</code> 放到 <code>docs/assets/</code>。</span>
+        </figcaption>
+      </figure>
+      <noscript>
+        <p>未启用脚本时，请直接打开 <a href="assets/result.gif">assets/result.gif</a>（约 3.2MB）。</p>
+      </noscript>
+    </section>
+
+    <section class="section" id="limits" aria-labelledby="limits-title">
+      <h2 id="limits-title">局限（只写仓库里能核对的）</h2>
+      <ul class="limits">
+        <li>这个 GitHub Pages 站点不能加载 ncnn，也不能打开手机摄像头。要看实时效果，只能按 README 在 Android 上构建。</li>
+        <li>README 把 <code>ch_PP-OCRv3_det</code> 和 <code>dbnet++</code> 标成 <code>(bug)</code>，但没有写出具体现象。</li>
+        <li>实时路径是检测 + 画框。没有识别模型文件，也没有在预览上画出识别字符串。</li>
+        <li><code>new_det_infer-sim</code> 出现在界面数组里，assets 里没有对应文件。<code>dbnet++</code> 出现在 README，没有对应界面项和资产。</li>
+        <li><code>Det::load</code> 接收 <code>target_size</code> / mean / norm，<code>detect()</code> 里写死长边 640 和 ImageNet 归一化。</li>
+        <li>没有 LICENSE 文件。JNI 源文件头写的是 Tencent ncnn 的 BSD 3-Clause；<code>clipper.cpp</code> 头写的是 Boost Software License 1.0。</li>
+        <li>README 和源码都没有准确率、延迟表、测试机型或部署案例。本页也不补充这些数字。</li>
+      </ul>
+    </section>
+
+    <section class="section" id="refs" aria-labelledby="refs-title">
+      <h2 id="refs-title">出处</h2>
+      <ul class="refs">
+        <li><a href="https://github.com/UnstoppableCurry/ncnn-Android-DBnet">本仓库</a></li>
+        <li><a href="https://github.com/Tencent/ncnn">Tencent ncnn</a></li>
+        <li><a href="https://github.com/nihui/opencv-mobile">opencv-mobile</a></li>
+        <li><a href="https://github.com/PaddlePaddle/PaddleOCR">PaddleOCR</a></li>
+        <li><a href="https://github.com/FeiGeChuanShu/ncnn-Android-mediapipe_hand">ncnn-Android-mediapipe_hand</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>静态结果展示 · 预定地址 <a href="https://unstoppablecurry.github.io/ncnn-Android-DBnet/">unstoppablecurry.github.io/ncnn-Android-DBnet</a></p>
+      <p>文字只来自 README 与源码；活动影像只来自根目录 <code>result.gif</code>。</p>
+    </div>
+  </footer>
+  <script src="script.js" defer></script>
+</body>
+</html>

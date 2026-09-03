@@ -1,7 +1,6 @@
-## The Android demo of dbnet/dbnet++ infer by ncnn  
+## The Android demo of dbnet/dbnet++ infer by ncnn
 
-
-
+**结果展示（静态页，不能在浏览器里跑模型）：** https://unstoppablecurry.github.io/ncnn-Android-DBnet/
 
 https://github.com/Tencent/ncnn  
 https://github.com/nihui/opencv-mobile
